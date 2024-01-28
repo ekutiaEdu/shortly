@@ -1,4 +1,4 @@
-import src.services.short_code_generator as generator
+import src.domain.short_code_generator as generator
 
 
 def test_generator_by_default_return_code_with_len_8():
