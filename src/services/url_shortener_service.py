@@ -12,7 +12,7 @@ class UrlShortenerService:
         with self.uow:
             short_code = generator.generate()
             self.uow.save_url_mapping(short_code=short_code, original_url=original_url)
-            return short_code
+        return short_code
 
     def get_original_url(self, short_code: str) -> str:
         with self.uow:
