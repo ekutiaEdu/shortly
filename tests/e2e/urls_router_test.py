@@ -15,9 +15,10 @@ from src.routers.urls_router import urls_router
 
 @pytest.fixture()
 def engine():
-    engine = create_engine(f"sqlite:///test.db")
+    engine = create_engine(f"sqlite:///data/test.db")
     Base.metadata.create_all(bind=engine)
-    return engine
+    yield engine
+    Base.metadata.drop_all(bind=engine)
 
 
 @pytest.fixture

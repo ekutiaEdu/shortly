@@ -6,7 +6,7 @@ authors = ["e.kutilov <kutilov.egor@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "3.11"
+python = "^3.11"
 fastapi = "^0.109.0"
 sqlalchemy = "^2.0.25"
 uvicorn = "^0.27.0"
