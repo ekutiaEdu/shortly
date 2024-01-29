@@ -1,3 +1,5 @@
+import logging
+
 from fastapi import APIRouter, Depends, Request, HTTPException
 from starlette import status
 from starlette.responses import RedirectResponse
@@ -21,7 +23,7 @@ def create_short_url(
         url = f"{str(request.base_url)}{short_code}"
         return {"short_code": short_code, "url": url}
     except Exception as e:
-        print(e)
+        logging.ERROR
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error message: {str(e)}",
@@ -34,10 +36,10 @@ def delete_short_url(body: DeleteUrlDto, uow: UnitOfWorkAbstract = Depends(creat
         service = UrlShortenerService(uow=uow)
         service.delete_by_short_code(short_code=body.short_code)
     except UrlNotFoundException as e:
-        print(e)
+        logging.info(e)
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
     except Exception as e:
-        print(e)
+        logging.error(e)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error message: {str(e)}",
@@ -55,10 +57,10 @@ def redirect_to_original_url(
             url=original_url, status_code=status.HTTP_307_TEMPORARY_REDIRECT
         )
     except UrlNotFoundException as e:
-        print(e)
+        logging.info(e)
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
     except Exception as e:
-        print(e)
+        logging.error(e)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error message: {str(e)}",

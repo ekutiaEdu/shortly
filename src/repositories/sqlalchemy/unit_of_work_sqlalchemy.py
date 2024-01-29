@@ -1,3 +1,5 @@
+import logging
+
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import sessionmaker
 
@@ -33,7 +35,7 @@ class UnitOfWorkSqlAlchemy(UnitOfWorkAbstract):
             if not str(e).startswith("CHECK constraint failed: LENGTH"):
                 raise ShortCodeAlreadyExists() from e
         except Exception as e:
-            print(e)
+            logging.error(e)
             self.rollback()
             raise Exception from e
 
