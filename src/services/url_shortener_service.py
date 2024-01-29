@@ -1,6 +1,6 @@
+import src.domain.short_code_generator as generator
 from src.domain.exceptions import UrlNotFoundException
 from src.repositories.unit_of_work import UnitOfWorkAbstract
-import src.domain.short_code_generator as generator
 
 
 class UrlShortenerService:

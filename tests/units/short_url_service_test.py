@@ -50,7 +50,9 @@ async def test_url_shortener_service_saves_to_database(url_shortener_service):
 
 
 @pytest.mark.asyncio
-async def test_url_shortener_service_generate_2_codes_return_correct_url_by_code(url_shortener_service):
+async def test_url_shortener_service_generate_2_codes_return_correct_url_by_code(
+    url_shortener_service,
+):
     original_url_1 = "https://example.com/somepath_1/a?user_id=22312"
     original_url_2 = "https://example.com/somepath_2/a?user_id=22312"
     short_code_1 = url_shortener_service.shorten_url(original_url_1)
@@ -64,7 +66,9 @@ async def test_url_shortener_service_generate_2_codes_return_correct_url_by_code
 
 
 @pytest.mark.asyncio
-async def test_url_shortener_service_deleted_entry_is_not_existed(url_shortener_service):
+async def test_url_shortener_service_deleted_entry_is_not_existed(
+    url_shortener_service,
+):
     original_url = "https://example.com/somepath/a?user_id=22312"
     short_code = url_shortener_service.shorten_url(original_url)
 
@@ -75,6 +79,8 @@ async def test_url_shortener_service_deleted_entry_is_not_existed(url_shortener_
 
 
 @pytest.mark.asyncio
-async def test_url_shortener_service_get_nonexistent_short_code_raises_exception(url_shortener_service):
+async def test_url_shortener_service_get_nonexistent_short_code_raises_exception(
+    url_shortener_service,
+):
     with pytest.raises(UrlNotFoundException):
         url_shortener_service.get_original_url("fake")

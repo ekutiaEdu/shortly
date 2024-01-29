@@ -6,3 +6,8 @@ class UrlNotFoundException(Exception):
 
     def __str__(self):
         return f"{self.message}: Short code '{self.short_code}'"
+
+
+class ShortCodeAlreadyExists(Exception):
+    def __init__(self, message="Short code already exists"):
+        super().__init__(message)
